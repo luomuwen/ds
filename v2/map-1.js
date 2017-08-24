@@ -1,6 +1,6 @@
 'use strict';
 
-let startX = 0, startY = 0;
+let startX = 0, startY = 1;
 
 exports.getMap = (params) => {
     var arr = parseStr(params);
@@ -10,7 +10,7 @@ exports.getMap = (params) => {
 
 exports.getNextStartPoint = (map) => {
     if(startX >= column(map)){
-        startY++;
+        startY += 4;
         startX = 0;
         if(startY >= row(map)){
             return null;

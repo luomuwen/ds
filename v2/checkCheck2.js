@@ -4,14 +4,28 @@
  */
 'use strict';
 
-var mapSite = require('./map.js');
-var postResult = require('./postResult.js');
+var mapSite0 = require('./map-0.js');
+var mapSite1 = require('./map-1.js');
+var mapSite2 = require('./map-2.js');
+var mapSite3 = require('./map-3.js');
+
+var postResult = require('./../postResult.js');
+var async = require('async');
 
 exports.sweep=sweep;
 
 
-function sweep(paramStr){
-
+function sweep(paramStr, index){
+    let mapSite = null;
+    if(index == 0) {
+        mapSite = mapSite0;
+    } else if(index == 1){
+        mapSite = mapSite1;
+    } else if(index == 2){
+        mapSite = mapSite2;
+    } else {
+        mapSite = mapSite3;
+    }
     var gMap = mapSite.getMap(paramStr);
     let startPoint = mapSite.getNextStartPoint(gMap);
     while(startPoint != null){
@@ -48,6 +62,7 @@ function trail(map, position, startPosition, steps, cb){
         let isSuccessDown = false;
         let isSuccessLeft = false;
         let isSuccessRight = false;
+
 
         if(canUp(map, position)){
             let result = up(map, position);

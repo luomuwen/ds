@@ -21,7 +21,6 @@ public class CountingSort{
             countArray[i] = countArray[i] + countArray[i-1];
         }
         for(int i = array.length - 1; i >= 0; i--){
-            // System.out.println(countArray[array[i]]);
             result[countArray[array[i]]- 1] = array[i];
             countArray[array[i]] = countArray[array[i]] - 1;
         }

@@ -1,9 +1,12 @@
+/**
+ * 
+ */
 class QuickSort {
 
     int[] arr;
 
     public static void main(String[] args){
-        int[] arrays = {322,2,3,4,6,1,2,3,4,32,232,434,1,2323,2342,323};
+        int[] arrays = {4,3,2,1,1,2,3,4};
 
         qsort(arrays, 0, arrays.length-1);
         
@@ -12,31 +15,30 @@ class QuickSort {
 
     static void qsort(int[] arrays, int start, int end){
         if(start < end){
-            int pivot = arrays[start];
-            int left = start , right = end, index = start;
-            while(right > index){
-                if(arrays[right] < pivot){
-                    //swap
-                    arrays[index] = arrays[right];
-                    index = right;
-                    arrays[right] = pivot;
-                    break;
-                }
-                right--;
-            }
-            while(left < index){
-                if(arrays[left] > pivot){
-                    //swap
-                    arrays[index] = arrays[left];
-                    index = left;
-                    arrays[left] = pivot;
-                    break;
-                }
-                left++;
-            }
-            qsort(arrays, start, index-1);
-            qsort(arrays, index+1, end);
+            int left = parition(arrays, start, end);
+            qsort(arrays, start, left-1);
+            qsort(arrays, left+1, end);
         }
+    }
+
+
+    static int parition(int[] arr, int start, int end){
+        int pivot = arr[start];
+        int i = start, j = start + 1;
+        while(j<=end){
+            if(arr[j] < pivot){
+                i++;
+                int temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp; 
+            }
+            j = j+1;
+        }
+
+        int temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+        return i;
     }
 
 
